@@ -22,11 +22,11 @@ Also for faster and easie data analysis and manipulation, Pandas have been used 
 
 ## labeler.py
 
-Data labelling allows the user to create a dataset of the features they are interested in. At startup, user can enter details of their name, feature interested in and number of samples they wish to examine. \\
+Data labelling allows the user to create a dataset of the features they are interested in. At startup, user can enter details of their name, feature interested in and number of samples they wish to examine.
 
-Afterwards, two subplots are generated. First one, a salinity against temperature graph of random float and profile is drawn with scatter points colour codded by pressure. Since the behaviour of floats is highly dependent on its location a fully interactive map is also implemented as the second subplot, showing the location of current float and also the ones previously selected. \\
+Afterwards, two subplots are generated. First one, a salinity against temperature graph of random float and profile is drawn with scatter points colour codded by pressure. Since the behaviour of floats is highly dependent on its location a fully interactive map is also implemented as the second subplot, showing the location of current float and also the ones previously selected. 
 
-The feature interested can then be selected using a rectangular tool which is activated on launch or re-activated by key press of "T". Once the feature is highlighted the user has 2 choices to label the selection as good by pressing the "G" key or as bad by pressing "R" key. Colour coded as Green and red respectively in the map subplot. While the current float examined is labeled with a white dot. The selection made is also displayed on the screen for the user. In the scenario where the user closes the application without making any selection, no data will be entered to the database and the next random one will be presented. \\
+The feature interested can then be selected using a rectangular tool which is activated on launch or re-activated by key press of "T". Once the feature is highlighted the user has 2 choices to label the selection as good by pressing the "G" key or as bad by pressing "R" key. Colour coded as Green and red respectively in the map subplot. While the current float examined is labeled with a white dot. The selection made is also displayed on the screen for the user. In the scenario where the user closes the application without making any selection, no data will be entered to the database and the next random one will be presented. 
 
 Once the requested sample size has been reached, the user entries are presented to the user and given an option to name the csv file where the selections will be stored for later usage in training.
 
