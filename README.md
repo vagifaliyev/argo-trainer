@@ -9,17 +9,6 @@ Having access to more information is beneficial, however it is difficult to go t
 
 With the help of argo.py, the downloading of the data has been automated using a script. No other argo related piece of research has been used. Since the data-set of available argo floats is very large, the user can specify which exact float data they would like to download and work on. If any problem occurs, such as due to corrupted files, in successfully downloading the data a notification pops up to notify the user of the argo float id that caused the problem. The addition to the list can be made and already downloaded files will not be attempted to be downloaded again. 
 
-### Run
-```
-  python3 retrive.py
-```
-
-### Requirement(s)
-
-Argo.py library is required to access the database and the instructions to download it can be found [argo.py](https://pypi.org/project/argopy/)
-
-Also for faster and easie data analysis and manipulation, Pandas have been used and can be installed with these [instructions](https://pandas.pydata.org/pandas-docs/stable/getting_started/install.html)
-
 ## labeler.py
 
 Data labelling allows the user to create a dataset of the features they are interested in. At startup, user can enter details of their name, feature interested in and number of samples they wish to examine.
@@ -30,10 +19,10 @@ The feature interested can then be selected using a rectangular tool which is ac
 
 Once the requested sample size has been reached, the user entries are presented to the user and given an option to name the csv file where the selections will be stored for later usage in training.
 
-### Run
-```
-  python3 labeler.py
-```
+## authenticator.py
+
+Authenticator allows the user to observe the prediction made by the algorithm. User can approve the prediction as correct by pressing the "B"key thus increasing the training data set or correct the prediction by making a new selection as previously described. Once the user is satisfied with the predictions, the training is concluded. 
+
 
 ### Requirement(s)
 
@@ -41,15 +30,11 @@ Matplotlib is a widely used graphing library, and can be installed via [instruct
 
 Geographical map data is recieved from Basemap and that can be install by following these [instructions](https://matplotlib.org/basemap/users/installing.html)
 
+Also for faster and easie data analysis and manipulation, Pandas have been used and can be installed with these [instructions](https://pandas.pydata.org/pandas-docs/stable/getting_started/install.html)
+
+Argo.py library is required to access the database and the instructions to download it can be found [argo.py](https://pypi.org/project/argopy/)
+
 This also requires Pandas for data manipulation.
 
-## authenticator.py
-
-Authenticator allows the user to observe the prediction made by the algorithm. User can approve the prediction as correct by pressing the "B"key thus increasing the training data set or correct the prediction by making a new selection as previously described. Once the user is satisfied with the predictions, the training is concluded. 
-
-### Run
-```
-  python3 authenticator.py
-```
 
 
