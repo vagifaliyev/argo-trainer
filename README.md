@@ -16,7 +16,7 @@ Please read [report.pdf](https://github.com/vagifaliyev/argo_trainer/report.pdf)
 
 With the help of argo.py, the downloading of the data has been automated using a script. No other argo related piece of research has been used. Since the data-set of available argo floats is very large, the user can specify which exact float data they would like to download and work on. If any problem occurs, such as due to corrupted files, in successfully downloading the data a notification pops up to notify the user of the argo float id that caused the problem. The addition to the list can be made and already downloaded files will not be attempted to be downloaded again. 
 
-## labeler.py [](https://github.com/vagifaliyev/argo_trainer/labeler.py)
+## labeler.py [labeler.py](https://github.com/vagifaliyev/argo_trainer/labeler.py)
 
 Data labelling allows the user to create a dataset of the features they are interested in. At startup, user can enter details of their name, feature interested in and number of samples they wish to examine.
 
