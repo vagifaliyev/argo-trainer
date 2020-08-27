@@ -1,6 +1,8 @@
 ARGO TRAINER
 ============================
 
+![app](https://github.com/vagifaliyev/argo_trainer/blob/master/app.png)
+
 
 Studying ocean is very essential for Earth as it cover 70 % of its surface, absorbs 1/3 of carbon dioxide emissions and plays the major role in protecting the world from the effects of greenhouse (Le Qu ́er ́e et al. 2012). Thus, obtaining data and understanding it in this field has become more essential as these factors have become more threatening. One of the leading providers of ocean data is ARGO floats with over 3200 floats (growing) reporting with 10,000 profiles per month, providing a range of properties such as water mass, salinity, temperature etc . This data enables scientists to understand how the state of oceans change over time and helps humanity monitor issues such as sea level rise, ocean heat content and warming, ocean circulation and the water cycle 
 
