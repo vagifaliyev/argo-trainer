@@ -10,13 +10,13 @@ Having access to more information is beneficial, however it is difficult to go n
 
 The software created provides automated method of creating a local database for argo data, visual- ization platform for graphical data and geographical mapping of sensor locations. Most importantly, allows the users to freely label data by interacting with graphs via multiple tools such as selector, zooming, panning and saving. Coding has been implemented in a modular way, thus user can insert their own prediction algorithms easily, observe its results through authenticator and further provide more training data till satisfactory results have been achieved. The final software is a product of constant user feed-back provided, matching the needs of researches in oceanography field. Before the publication of this software, there was no platform or mechanism to record knowledge of studies as data as there was no defined architecture to learn from each others analysis other than publication. To combat that problem, the main goal of the project is to provide a platform for researches across the field to share their data analysis and learn from each other in an interactive way.
 
-Please read [report.pdf](https://github.com/vagifaliyev/argo_trainer/blob/master/report.pdf) for more information on code of conduct, development stages and algorthims.
+Please read [report.pdf](https://github.com/acse-2019/irp-acse-va719/blob/master/Code/report.pdf) for more information on code of conduct, development stages and algorthims.
 
-## retrive.py
+## [retrive.py](https://github.com/vagifaliyev/argo-trainer/blob/master/argo_data/retrive.py)
 
 With the help of argo.py, the downloading of the data has been automated using a script. No other argo related piece of research has been used. Since the data-set of available argo floats is very large, the user can specify which exact float data they would like to download and work on. If any problem occurs, such as due to corrupted files, in successfully downloading the data a notification pops up to notify the user of the argo float id that caused the problem. The addition to the list can be made and already downloaded files will not be attempted to be downloaded again. 
 
-## labeler.py
+## [labeler.py](https://github.com/vagifaliyev/argo-trainer/blob/master/labeler.py)
 
 Data labelling allows the user to create a dataset of the features they are interested in. At startup, user can enter details of their name, feature interested in and number of samples they wish to examine.
 
@@ -26,7 +26,7 @@ The feature interested can then be selected using a rectangular tool which is ac
 
 Once the requested sample size has been reached, the user entries are presented to the user and given an option to name the csv file where the selections will be stored for later usage in training.
 
-## authenticator.py
+## [authenticator.py](https://github.com/vagifaliyev/argo-trainer/blob/master/authenticator.py)
 
 Authenticator allows the user to observe the prediction made by the algorithm. User can approve the prediction as correct by pressing the "B" key thus increasing the training data set or correct the prediction by making a new selection as previously described. Programme has been writen in a modular way so that the user can replace the predictive algorithm with their own. Once the user is satisfied with the predictions, the training is concluded. 
 
@@ -46,7 +46,3 @@ This also requires Pandas for data manipulation.
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/vagifaliyev/argo_trainer/blob/master/LICENSE) file for details.
-
-
-
-
