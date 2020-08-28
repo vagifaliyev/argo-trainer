@@ -272,7 +272,6 @@ def main():
 
         #select random float float 
         argo = random.choice(list_float)
-        argo = 3901987
         #access the random float  from database
         if online == False:
             argo_float = pd.read_csv("./argo_data/"+str(argo)+'.csv') 
@@ -295,7 +294,6 @@ def main():
 
         #randomly select a profile 
         prof = random.choice(list_prof)
-        prof = 305
         #access the requested profile number datas 
         df = argo_float.loc[argo_float['CYCLE_NUMBER'] == prof]
 
