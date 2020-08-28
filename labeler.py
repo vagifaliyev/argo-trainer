@@ -14,6 +14,7 @@ import os
 style.use("Solarize_Light2")
 
 colour = None
+online = None
 
 def line_select_callback(eclick, erelease):
     'eclick and erelease are the press and release events'
@@ -87,9 +88,14 @@ def main():
     # will create a data set 
     print('-----------------------------------------------')
     user = input("Enter name: ")
-    #print("Welcome "+ user)
     feat = input("Feature interested: ")
     gen = input("Number of samples: ")
+
+    online = False
+    onlinee = input('Use online (y) or local data base (n) ? ')
+
+    if onlinee == 'y':
+        online = True 
 
     print('--------- Graph Info ---------')
     print(" White dot represents the current location \n press 'g' to label data as good \n press 'r' to label data poor")
@@ -117,7 +123,25 @@ def main():
         argo = random.choice(list_float)
 
         #access the random float  from database
-        argo_float = pd.read_csv("./argo_data/"+str(argo)+'.csv') 
+        if online == False:
+            argo_float = pd.read_csv("./argo_data/"+str(argo)+'.csv') 
+        if online == True:
+            print("--------ARGOPY---------")
+            #only importing library if online requested by user 
+            from argopy import DataFetcher as ArgoDataFetcher
+            print("-----------------------")
+
+            argo_loader = ArgoDataFetcher()
+
+            #access certain data and profile 
+            ds = argo_loader.float(argo).to_xarray()
+            #conver to pandas
+            argo_float = ds.to_dataframe()
+
+            # entries with qc flag of 1 for Pressure and Temo
+            # if not 1, remove row
+            argo_float = argo_float[argo_float.PSAL_QC == 1]
+            argo_float = argo_float[argo_float.TEMP_QC == 1]
 
         #recieve a list of profiles in the float
         list_prof = list(dict.fromkeys(argo_float['CYCLE_NUMBER']))
@@ -169,8 +193,6 @@ def main():
         plt.connect('key_press_event', toggle_selector)
 
         # basemap mapping
-        # t2 = time.time()
-
         ax2 = plt.subplot(gs[1])     
         #load the saved map
         m = pickle.load(open('map.pickle','rb'))

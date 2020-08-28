@@ -13,11 +13,32 @@ import glob # get file names
 from matplotlib import style
 from pandas.api.types import is_numeric_dtype
 
+online = None
+onlinee = input('Use online (y) or local data base (n) ? ')
+
+if onlinee == 'y':
+    print("Using online data base")
+    online = True 
+else:
+    print("Using local data base")
+    online = False 
+    print("----------------------")
+
+
+#if online requested use argopy
+if online == True:
+    print("--------ARGOPY---------")
+    #only importing library if online requested by user 
+    from argopy import DataFetcher as ArgoDataFetcher
+    argo_loader = ArgoDataFetcher()
+    print("-----------------------")
+
 
 style.use("Solarize_Light2")
 
 colour = None
 feature = None
+
 
 def line_select_callback(eclick, erelease):
     'eclick and erelease are the press and release events'
@@ -63,6 +84,7 @@ def de_normalize(array, norm):
 # get avarage normalized values 
 def train(feature):
     # USER SELECTION DATA
+    global online 
     print("-> training started")
 
     path = r'./laballed_data/' # use your path
@@ -93,22 +115,34 @@ def train(feature):
 
         df_normie = pd.DataFrame(columns=['x1', 'x2', 'y1', 'y2'])
         path = r'./argo_data/' # use your path
-
         for i in range(len(df_y.index)):
-            data = pd.read_csv(path+(str(argos[i])+".csv")) #access right float
+            #access the random float  from database
+            if online == False:
+                data = pd.read_csv(path+(str(argos[i])+".csv")) #access right float 
+            if online == True:
+                #access certain data and profile 
+                ds = argo_loader.float(int(argos[i])).to_xarray()
+                #conver to pandas
+                data = ds.to_dataframe()
+
+                # entries with qc flag of 1 for Pressure and Temo
+                # if not 1, remove row
+                data = data[data.PSAL_QC == 1]
+                data = data[data.TEMP_QC == 1]
 
             data = data.loc[data['CYCLE_NUMBER'] == profiles[i]] # access right profile
-
             #normalize the values between -1 and 1 
             TEMP = data[['TEMP']].to_numpy()
             PSAL = data[['PSAL']].to_numpy()
 
-            x1 = normalize(PSAL, df_y['x1'][i])
-            x2 = normalize(PSAL, df_y['x2'][i])
-            y1 = normalize(TEMP, df_y['y1'][i])
-            y2 = normalize(TEMP, df_y['y2'][i])
+            #if data exists 
+            if data.empty == False:
+                x1 = normalize(PSAL, df_y['x1'][i])
+                x2 = normalize(PSAL, df_y['x2'][i])
+                y1 = normalize(TEMP, df_y['y1'][i])
+                y2 = normalize(TEMP, df_y['y2'][i])
 
-            df_normie = df_normie.append({'x1': x1, 'x2': x2, 'y1': y1, 'y2': y2},ignore_index=True)  
+                df_normie = df_normie.append({'x1': x1, 'x2': x2, 'y1': y1, 'y2': y2},ignore_index=True)  
 
         x_1 = df_normie["x1"].mean()
         x_2 = df_normie["x2"].mean()
@@ -141,19 +175,11 @@ def check_inrange(df,x1,x2,y2,y1):
 
     # only select values that are where the temp values lie
     df_c = df[df['TEMP'].between(y2, y1)]
-    # print(df_c)
-
-    # print(str(y1)+"--"+str(y2))
-    # print(str(x1)+"++"+str(x2))
 
     check_temp = df_c['TEMP'].between(y2,y1,inclusive=False)
     check_psal = df_c['PSAL'].between(x1,x2,inclusive=False)
-    #print(str(x1)+'+++'+str(x2))
-    # print((check_temp == True).any())
-    # print((check_psal == True).any())
 
     if not (check_temp == True).any() == True & (check_psal == True).any() == True :
-        #print("HI")
         df1 = df_iqr(0.25, 0.75, df, ['PSAL','TEMP'])
         psal1 = df['PSAL']
         temp1 = df['TEMP']
@@ -164,7 +190,6 @@ def check_inrange(df,x1,x2,y2,y1):
         check_temp = df_c['TEMP'].between(y2,y1,inclusive=False)
         check_psal = df_c['PSAL'].between(x1,x2,inclusive=False)
         if not (check_temp == True).any() == True & (check_psal == True).any() == True :
-            #print("HELLO")
             df2 = df_iqr(0.2, 0.8, df, ['PSAL','TEMP'])
             psal2 = df2['PSAL']
             temp2 = df2['TEMP']
@@ -216,13 +241,12 @@ def main():
     df_main = pd.DataFrame(columns=['Feature','Float', 'Profile', 'Colour', 'x1', 'x2', 'y1', 'y2','lat', 'long'])
 
     # will create a data set 
-    print('-----------------------------------------------')
     user = input("Enter name: ")
 
     #print("Welcome "+ user)
     feat = input("Feature interested: ")
     gen = input("Number of samples: ")
-
+    
     global x_1, x_2, y_1 ,y_2
     
     x_1, x_2, y_1 ,y_2, feat = train(feat)
@@ -248,17 +272,30 @@ def main():
 
         #select random float float 
         argo = random.choice(list_float)
-
-        
+        argo = 3901987
         #access the random float  from database
-        argo_float = pd.read_csv("./argo_data/"+str(argo)+'.csv') 
+        if online == False:
+            argo_float = pd.read_csv("./argo_data/"+str(argo)+'.csv') 
+        if online == True:
+            argo_loader = ArgoDataFetcher()
+
+            #access certain data and profile 
+            ds = argo_loader.float(argo).to_xarray()
+            #conver to pandas
+            argo_float = ds.to_dataframe()
+
+            # entries with qc flag of 1 for Pressure and Temo
+            # if not 1, remove row
+            argo_float = argo_float[argo_float.PSAL_QC == 1]
+            argo_float = argo_float[argo_float.TEMP_QC == 1]
+
 
         #recieve a list of profiles in the float
         list_prof = list(dict.fromkeys(argo_float['CYCLE_NUMBER']))
 
         #randomly select a profile 
         prof = random.choice(list_prof)
-
+        prof = 305
         #access the requested profile number datas 
         df = argo_float.loc[argo_float['CYCLE_NUMBER'] == prof]
 
