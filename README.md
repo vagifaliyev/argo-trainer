@@ -10,7 +10,7 @@ Having access to more information is beneficial, however it is difficult to go n
 
 The software created provides automated method of creating a local database for argo data, visual- ization platform for graphical data and geographical mapping of sensor locations. Most importantly, allows the users to freely label data by interacting with graphs via multiple tools such as selector, zooming, panning and saving. Coding has been implemented in a modular way, thus user can insert their own prediction algorithms easily, observe its results through authenticator and further provide more training data till satisfactory results have been achieved. The final software is a product of constant user feed-back provided, matching the needs of researches in oceanography field. Before the publication of this software, there was no platform or mechanism to record knowledge of studies as data as there was no defined architecture to learn from each others analysis other than publication. To combat that problem, the main goal of the project is to provide a platform for researches across the field to share their data analysis and learn from each other in an interactive way.
 
-Please read [report.pdf](https://github.com/acse-2019/irp-acse-va719/blob/master/Code/report.pdf) for more information on code of conduct, development stages and algorthims.
+Please read [report.pdf](https://github.com/vagifaliyev/argo-trainer/blob/master/report.pdf) for more information on code of conduct, development stages and algorthims.
 
 ## [retrive.py](https://github.com/vagifaliyev/argo-trainer/blob/master/argo_data/retrive.py)
 
